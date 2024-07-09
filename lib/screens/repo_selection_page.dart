@@ -4,6 +4,8 @@ import '../models/repository.dart';
 import 'main_page.dart';
 
 class RepoSelectionPage extends StatelessWidget {
+  final String userId;
+  final String gitcatSecret;
   final List<Owner> owners = [
     Owner(name: 'My Repos', repositories: [
       Repository(name: 'repository 1'),
@@ -16,6 +18,8 @@ class RepoSelectionPage extends StatelessWidget {
       Repository(name: 'Organization 3'),
     ]),
   ];
+
+  RepoSelectionPage({required this.userId, required this.gitcatSecret});
 
   @override
   Widget build(BuildContext context) {

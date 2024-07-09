@@ -1,9 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'repo_selection_page.dart';
+import 'dart:async';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  StreamSubscription? _sub;
+
+  @override
+  void initState() {
+    super.initState();
+    _handleIncomingLinks();
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    super.dispose();
+  }
+
+  void _handleIncomingLinks() {
+    _sub = uriLinkStream.listen((Uri? uri) {
+      if (uri != null) {
+        String? userId = uri.queryParameters['user_id'];
+        String? receivedSecret = uri.queryParameters['gitcat_secret'];
+        String? storedSecret = dotenv.get('GITCAT_SECRET');
+
+        if (userId != null && receivedSecret != null) {
+          print('userId : ${userId} !');
+          if (receivedSecret == storedSecret) {
+            print('secrets matched !');
+            print('login success!');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RepoSelectionPage(userId: userId, gitcatSecret: receivedSecret),
+              ),
+            );
+          } else {
+            print('        receivedSecret: '+receivedSecret + '        storedSecret: '+ storedSecret);
+            throw('secrets do not match!');
+            // Handle the case where secrets do not match (e.g., show an error message)
+          }
+        }else{
+          throw('userId or secret is null -- never!');
+        }
+      }
+    }, onError: (Object err) {
+      print('Error occurred: $err');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +78,6 @@ class LoginPage extends StatelessWidget {
                 // Launch the GitHub authentication URL
                 const url = 'http://34.64.230.8:3000/auth/github';
                 launchUrlString(url);
-                // Pass the access token to the next page
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => RepoSelectionPage(accessToken: accessToken)),
-                // );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,

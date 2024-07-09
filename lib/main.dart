@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screens/login_page.dart';
-import 'screens/repo_selection_page.dart';
-import 'screens/main_page.dart';
-import 'screens/milestones_screen.dart';
-import 'screens/recent_commits_screen.dart';
-import 'screens/my_tils_screen.dart';
-import 'screens/commit_detail_screen.dart';
-import 'screens/issue_edit_screen.dart';
-import 'screens/issue_add_screen.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   runApp(MyApp());
 }
 
