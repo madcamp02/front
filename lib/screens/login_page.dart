@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'repo_selection_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -18,12 +20,15 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () {
-                // Navigate to Repo Selection Page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RepoSelectionPage()),
-                );
+              onPressed: () async {
+                // Launch the GitHub authentication URL
+                const url = 'http://34.64.230.8:3000/auth/github';
+                launchUrlString(url);
+                // Pass the access token to the next page
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => RepoSelectionPage(accessToken: accessToken)),
+                // );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
