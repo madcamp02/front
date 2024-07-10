@@ -16,12 +16,13 @@ class TIL {
   });
 
   factory TIL.fromJson(Map<String, dynamic> json) {
+    print('Parsing TIL from JSON: $json');
     return TIL(
-      tilId: json['til_id'],
-      userId: json['user_id'],
-      tilContent: json['til_content'],
-      commitId: json['commit_id'],
-      commitMsg: json['commit_msg'],
+      tilId: json['til_id'] is String ? int.parse(json['til_id']) : json['til_id'],
+      userId: json['user_id'] is String ? int.parse(json['user_id']) : json['user_id'],
+      tilContent: json['til_content'] ?? '',
+      commitId: json['commit_id'] is String ? int.parse(json['commit_id']) : json['commit_id'],
+      commitMsg: json['commit_msg'] ?? '',
       commitDate: DateTime.parse(json['commit_date']),
     );
   }
