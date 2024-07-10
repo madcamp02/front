@@ -165,7 +165,7 @@ class _RepoSelectionPageState extends State<RepoSelectionPage> {
                         ),
                       ),
                       onTap: () {
-                        navigateToMainPage(repo.repoId.toString(), ownersRepos[index].item1.ownerGithubId.toString());
+                        navigateToMainPage(repo.repoGithubId.toString(), ownersRepos[index].item1.ownerGithubId.toString());
                       },
                     );
                   }).toList(),

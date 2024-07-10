@@ -121,10 +121,10 @@ class MainPage extends StatelessWidget {
                           leading: Icon(Icons.event_note, color: Colors.white, size: 40),
                           title: Text('Milestones', style: TextStyle(color: Colors.white, fontSize: 24)),
                           onTap: () async {
-                            await sendRepoDetails();
+                            // await sendRepoDetails();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => MilestonesScreen()),
+                              MaterialPageRoute(builder: (context) => MilestonesScreen(userGithubId: userGithubId, ownerGithubId: ownerGithubId, repoGithubId: repoGithubId)),
                             );
                           },
                         ),
@@ -167,7 +167,7 @@ class MainPage extends StatelessWidget {
                           leading: Icon(Icons.event_note, color: Colors.white, size: 40),
                           title: Text('My TILs', style: TextStyle(color: Colors.white, fontSize: 24)),
                           onTap: () async {
-                            await sendTilDetails();
+                            // await sendTilDetails();
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => MyTILsScreen(userGithubId: userGithubId, ownerGithubId: ownerGithubId)),

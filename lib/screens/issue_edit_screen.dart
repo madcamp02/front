@@ -17,7 +17,8 @@ class IssueEditScreen extends StatelessWidget {
           children: [
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
-              controller: TextEditingController(text: issue.name),
+              // controller: TextEditingController(text: issue.name),
+              controller: TextEditingController(text: 'dummy'),
             ),
             // Add other fields here
             ElevatedButton(
