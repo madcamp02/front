@@ -25,13 +25,8 @@ class _MyTILsScreenState extends State<MyTILsScreen> {
   }
 
   Future<void> fetchTils() async {
-    final response = await http.post(
-      Uri.parse('http://34.47.114.222:3000/fetch/tils?user_github_id=${widget.userGithubId}&gitcat_secret=${widget.storedSecret}'), // Adjust the URL accordingly
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'user_github_id': widget.userGithubId,
-        'gitcat_secret': dotenv.get('GITCAT_SECRET'),
-      }),
+    final response = await http.get(
+      Uri.parse('http://34.47.114.222:3000/gitcat/fetch/tils?user_github_id=${widget.userGithubId}&gitcat_secret=${widget.storedSecret}'), // Adjust the URL accordingly
     );
 
     if (response.statusCode == 200) {
@@ -41,6 +36,7 @@ class _MyTILsScreenState extends State<MyTILsScreen> {
       });
       print('TILs fetched successfully: ${data['tils']}');
     } else {
+      print(response.statusCode);
       print('Failed to fetch TILs');
     }
   }
@@ -60,12 +56,6 @@ class _MyTILsScreenState extends State<MyTILsScreen> {
             Text('GitCat', style: TextStyle(color: Colors.black, fontSize: 24)),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.circle, color: Color(0xFF8E5C9A)),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

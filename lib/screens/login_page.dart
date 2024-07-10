@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/logo.png', height: 100), // Replace with your logo asset
+            Image.asset('assets/chippi.jpg', height: 100), // Replace with your logo asset
             SizedBox(height: 20),
             Text(
               'GitCat',

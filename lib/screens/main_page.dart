@@ -80,12 +80,6 @@ class MainPage extends StatelessWidget {
             Text('GitCat', style: TextStyle(color: Colors.black, fontSize: 24)),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.circle, color: Color(0xFF8E5C9A)),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -96,15 +90,6 @@ class MainPage extends StatelessWidget {
               style: TextStyle(color: Color(0xFF8E5C9A), fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/cat1.png', height: 60),
-                Image.asset('assets/cat2.png', height: 60),
-                Image.asset('assets/cat3.png', height: 60),
-                Image.asset('assets/cat4.png', height: 60),
-              ],
-            ),
             SizedBox(height: 16),
             Expanded(
               child: ListView(

@@ -81,12 +81,6 @@ class _MilestonesScreenState extends State<MilestonesScreen> {
             Text('GitCat', style: TextStyle(color: Colors.black, fontSize: 24)),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.circle, color: Color(0xFF8E5C9A)),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: ListView.builder(
         padding: EdgeInsets.all(16.0),

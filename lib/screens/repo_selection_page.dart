@@ -82,7 +82,7 @@ class _RepoSelectionPageState extends State<RepoSelectionPage> {
         title: Row(
           children: [
             Image.asset(
-              'assets/gitcat_logo.png', // Make sure to have your logo asset here
+              'assets/logow.png', // Make sure to have your logo asset here
               height: 30,
             ),
             SizedBox(width: 8),

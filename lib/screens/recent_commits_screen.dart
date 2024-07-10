@@ -59,12 +59,6 @@ class _RecentCommitsScreenState extends State<RecentCommitsScreen> {
             Text('GitCat', style: TextStyle(color: Colors.black, fontSize: 24)),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.circle, color: Color(0xFF8E5C9A)),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: commits.isEmpty
           ? Center(child: CircularProgressIndicator())
