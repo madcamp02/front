@@ -7,9 +7,9 @@ import '../widgets/til_card.dart';
 
 class MyTILsScreen extends StatefulWidget {
   final String userGithubId;
-  final String ownerGithubId;
+  final String storedSecret = dotenv.get('GITCAT_SECRET');
 
-  MyTILsScreen({required this.userGithubId, required this.ownerGithubId});
+  MyTILsScreen({required this.userGithubId});
 
   @override
   _MyTILsScreenState createState() => _MyTILsScreenState();
@@ -26,7 +26,7 @@ class _MyTILsScreenState extends State<MyTILsScreen> {
 
   Future<void> fetchTils() async {
     final response = await http.post(
-      Uri.parse('http://localhost:3000/fetch/tils'), // Adjust the URL accordingly
+      Uri.parse('http://34.47.114.222:3000/fetch/tils?user_github_id=${widget.userGithubId}&gitcat_secret=${widget.storedSecret}'), // Adjust the URL accordingly
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'user_github_id': widget.userGithubId,

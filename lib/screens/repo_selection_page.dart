@@ -28,7 +28,7 @@ class _RepoSelectionPageState extends State<RepoSelectionPage> {
 
   Future<void> fetchRepositories() async {
     final response = await http.get(
-      Uri.parse('http://34.64.230.8:3000/gitcat/retrieve/owners-repos?user_github_id=${widget.userId}&gitcat_secret=${widget.storedSecret}'),
+      Uri.parse('http://34.47.114.222:3000/gitcat/retrieve/owners-repos?user_github_id=${widget.userId}&gitcat_secret=${widget.storedSecret}'),
     );
     if (response.statusCode == 200) {
       final data = json.decode(response.body);

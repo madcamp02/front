@@ -28,7 +28,7 @@ class MainPage extends StatelessWidget {
 
   Future<void> sendRepoDetails() async {
     final response = await http.post(
-      Uri.parse('http://34.64.230.8:3000/retrieve/commits'),
+      Uri.parse('http://34.47.114.222:3000/retrieve/commits'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'user_github_id': userGithubId,
@@ -48,7 +48,7 @@ class MainPage extends StatelessWidget {
 
   Future<void> sendTilDetails() async {
     final response = await http.post(
-      Uri.parse('http://34.64.230.8:3000/fetch/tils'),
+      Uri.parse('http://34.47.114.222:3000/fetch/tils'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'user_github_id': userGithubId,
@@ -147,7 +147,7 @@ class MainPage extends StatelessWidget {
                             await sendRepoDetails();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => RecentCommitsScreen(userGithubId: userGithubId, repoGithubId: repoGithubId)),
+                              MaterialPageRoute(builder: (context) => RecentCommitsScreen(userGithubId: userGithubId, ownerGithubId:ownerGithubId, repoGithubId: repoGithubId)),
                             );
                           },
                         ),
@@ -170,7 +170,7 @@ class MainPage extends StatelessWidget {
                             // await sendTilDetails();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => MyTILsScreen(userGithubId: userGithubId, ownerGithubId: ownerGithubId)),
+                              MaterialPageRoute(builder: (context) => MyTILsScreen(userGithubId: userGithubId)),
                             );
                           },
                         ),

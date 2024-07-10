@@ -32,20 +32,13 @@ class _MilestonesScreenState extends State<MilestonesScreen> {
   }
 
   Future<void> fetchMilestonesIssuesLabels() async {
-    print('Fetching milestones, issues, and labels...');
-    final url = Uri.parse(
-      'http://34.64.230.8:3000/gitcat/retrieve/mlstns-issues-labels?user_github_id=${widget.userGithubId}&owner_github_id=${widget.ownerGithubId}&repo_github_id=${widget.repoGithubId}&gitcat_secret=${widget.storedSecret}',
+    final response = await http.get(
+      Uri.parse(
+        'http://34.47.114.222:3000/gitcat/retrieve/mlstns-issues-labels?user_github_id=${widget.userGithubId}&owner_github_id=${widget.ownerGithubId}&repo_github_id=${widget.repoGithubId}&gitcat_secret=${widget.storedSecret}',
+      ),
     );
-    print('Request URL: $url');
-
-    final response = await http.get(url);
-
-    print('Response status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      print('Parsed data: $data');
       setState(() {
         milestones = parseMilestones(data['milestones']);
         issues = parseIssues(data['issues']);
