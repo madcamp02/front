@@ -77,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () async {
                 // Launch the GitHub authentication URL
                 const url = 'http://34.64.230.8:3000/auth/github';
+                //const url = 'http://localhost:3000/auth/github';
                 launchUrlString(url);
               },
               style: ElevatedButton.styleFrom(

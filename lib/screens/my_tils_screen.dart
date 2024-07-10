@@ -1,12 +1,49 @@
 import 'package:flutter/material.dart';
-import '../models/commit.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../models/til.dart';
 import '../widgets/til_card.dart';
 
-class MyTILsScreen extends StatelessWidget {
-  final List<Commit> tils = [
-    Commit(name: 'TIL 1', username: 'User1', date: 'Date1', issue: 'Issue1'),
-    Commit(name: 'TIL 2', username: 'User2', date: 'Date2', issue: 'Issue2'),
-  ];
+class MyTILsScreen extends StatefulWidget {
+  final String userGithubId;
+  final String ownerGithubId;
+
+  MyTILsScreen({required this.userGithubId, required this.ownerGithubId});
+
+  @override
+  _MyTILsScreenState createState() => _MyTILsScreenState();
+}
+
+class _MyTILsScreenState extends State<MyTILsScreen> {
+  List<TIL> tils = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchTils();
+  }
+
+  Future<void> fetchTils() async {
+    final response = await http.post(
+      Uri.parse('http://localhost:3000/fetch/tils'), // Adjust the URL accordingly
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'user_github_id': widget.userGithubId,
+        'gitcat_secret': dotenv.get('GITCAT_SECRET'),
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        tils = (data['tils'] as List).map((tilData) => TIL.fromJson(tilData)).toList();
+      });
+      print('TILs fetched successfully: ${data['tils']}');
+    } else {
+      print('Failed to fetch TILs');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

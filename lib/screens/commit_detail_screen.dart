@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/commit.dart';
+import 'package:intl/intl.dart'; // For formatting the date
 
 class CommitDetailScreen extends StatelessWidget {
   final Commit commit;
@@ -41,57 +42,37 @@ class CommitDetailScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Commit name',
+                  commit.commitMsg,
                   style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  commit.date,
+                  DateFormat('yyyy-MM-dd – kk:mm').format(commit.commitDate),
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 SizedBox(height: 8),
+                Divider(color: Colors.white),
+                SizedBox(height: 16),
                 Text(
-                  '------------------------------',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  '------------------------------',
+                  'Owner: ${commit.ownerGithubId}',
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'UserName',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  'Issue',
+                  'Issues:',
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 Wrap(
                   spacing: 8.0,
-                  children: [
-                    Chip(
-                      label: Text('Long Label'),
+                  children: commit.issueIdList.map((issue) {
+                    return Chip(
+                      label: Text(issue.toString()),
                       backgroundColor: Color(0xFFCDC3D0),
-                    ),
-                    Chip(
-                      label: Text('Short'),
-                      backgroundColor: Color(0xFFCDC3D0),
-                    ),
-                    Chip(
-                      label: Text('Medium'),
-                      backgroundColor: Color(0xFFCDC3D0),
-                    ),
-                    Chip(
-                      label: Icon(Icons.add),
-                      backgroundColor: Color(0xFFCDC3D0),
-                    ),
-                  ],
+                    );
+                  }).toList(),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'TIL',
+                  'TIL ID: ${commit.tilId ?? 'None'}',
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 SizedBox(height: 8),
@@ -101,6 +82,12 @@ class CommitDetailScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Color(0xFFEBE3EB),
                     borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'TIL content goes here', // This should be replaced with actual TIL content if available
+                      style: TextStyle(color: Colors.black, fontSize: 16),
+                    ),
                   ),
                 ),
                 SizedBox(height: 16),

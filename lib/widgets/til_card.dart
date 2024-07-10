@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/commit.dart';
+import '../models/til.dart';
 
 class TILCard extends StatelessWidget {
-  final Commit til;
+  final TIL til;
 
   TILCard({required this.til});
 
@@ -20,37 +20,17 @@ class TILCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'COMMIT TITLE',
+              til.commitMsg,
               style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
             Text(
-              'Date',
+              'Commit Date: ${til.commitDate}',
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
             SizedBox(height: 16),
             Text(
-              '-----------------------------',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '-----------------------------',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '-----------------------------',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '-----------------------------',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '-----------------------------',
+              til.tilContent,
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
             SizedBox(height: 16),
@@ -58,11 +38,11 @@ class TILCard extends StatelessWidget {
               spacing: 8.0,
               children: [
                 Chip(
-                  label: Text(til.issue),
+                  label: Text('Issue 1'), // Replace with actual issue data if available
                   backgroundColor: Color(0xFFCDC3D0),
                 ),
                 Chip(
-                  label: Text('Medium'),
+                  label: Text('Issue 2'), // Replace with actual issue data if available
                   backgroundColor: Color(0xFFCDC3D0),
                 ),
               ],

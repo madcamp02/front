@@ -28,7 +28,7 @@ class CommitCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                commit.name,
+                commit.commitMsg,
                 style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
@@ -38,31 +38,31 @@ class CommitCard extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Text(
-                commit.username,
+                'Owner ID: ${commit.ownerGithubId}',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
               Text(
-                commit.date,
+                'Repo ID: ${commit.repoGithubId}',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              Text(
+                'Commit Date: ${commit.commitDate}',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
               SizedBox(height: 16),
               Text(
-                'Issue',
+                'Issue IDs',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
               SizedBox(height: 8),
               Wrap(
                 spacing: 8.0,
-                children: [
-                  Chip(
-                    label: Text(commit.issue),
+                children: commit.issueIdList.map((issue) {
+                  return Chip(
+                    label: Text(issue.toString()),
                     backgroundColor: Color(0xFFCDC3D0),
-                  ),
-                  Chip(
-                    label: Text('Medium'),
-                    backgroundColor: Color(0xFFCDC3D0),
-                  ),
-                ],
+                  );
+                }).toList(),
               ),
             ],
           ),

@@ -30,10 +30,8 @@ class _RepoSelectionPageState extends State<RepoSelectionPage> {
     final response = await http.get(
       Uri.parse('http://34.64.230.8:3000/gitcat/retrieve/owners-repos?user_github_id=${widget.userId}&gitcat_secret=${widget.storedSecret}'),
     );
-    print(response);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      print(data);
       setState(() {
         ownersRepos = parseOwners(data['ownersRepos']);
       });
@@ -53,6 +51,26 @@ class _RepoSelectionPageState extends State<RepoSelectionPage> {
           .toList();
       return Tuple2(owner, repoList);
     }).toList();
+  }
+
+  void navigateToMainPage(String repoId, String ownerId) {
+    print('Navigating to MainPage with:');
+    print('userGithubId: ${widget.userId}');
+    print('repoGithubId: $repoId');
+    print('ownerGithubId: $ownerId');
+    print('gitcatSecret: ${widget.storedSecret}');
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MainPage(
+          userGithubId: widget.userId,
+          repoGithubId: repoId,
+          ownerGithubId: ownerId,
+          gitcatSecret: widget.storedSecret,
+        ),
+      ),
+    );
   }
 
   @override
@@ -147,12 +165,7 @@ class _RepoSelectionPageState extends State<RepoSelectionPage> {
                         ),
                       ),
                       onTap: () {
-                        // Navigate to Main Page
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MainPage()),
-                        );
+                        navigateToMainPage(repo.repoId.toString(), ownersRepos[index].item1.ownerGithubId.toString());
                       },
                     );
                   }).toList(),
