@@ -13,7 +13,7 @@ class CommitCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CommitDetailScreen(commit: commit)),
+          MaterialPageRoute(builder: (context) => CommitDetailScreen(commit: commit, userGithubId: commit.ownerGithubId)),
         );
       },
       child: Card(
